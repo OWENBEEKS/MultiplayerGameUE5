@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-MPShooter.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Intermediate/Build/Win64/x64/MPShooterEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h.obj"
+"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Intermediate/Build/Win64/x64/UnrealEditor/Development/MPShooter/MPShooter.cpp.obj"
+"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Intermediate/Build/Win64/x64/UnrealEditor/Development/MPShooter/PerModuleInline.gen.cpp.obj"
+"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Intermediate/Build/Win64/x64/UnrealEditor/Development/MPShooter/Default.rc2.res"
+/OUT:"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Intermediate/Build/Win64/x64/UnrealEditor/Development/MPShooter/UnrealEditor-MPShooter.lib"

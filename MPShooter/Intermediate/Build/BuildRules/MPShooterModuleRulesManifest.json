@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"D:\\Unreal Engine Projects\\MultiplayerGame\\MultiplayerGameUE5\\MPShooter\\Source\\MPShooter\\MPShooter.Build.cs",
+		"D:\\Unreal Engine Projects\\MultiplayerGame\\MultiplayerGameUE5\\MPShooter\\Source\\MPShooter.Target.cs",
+		"D:\\Unreal Engine Projects\\MultiplayerGame\\MultiplayerGameUE5\\MPShooter\\Source\\MPShooterEditor.Target.cs"
+	],
+	"EngineVersion": "5.6.0"
+}
