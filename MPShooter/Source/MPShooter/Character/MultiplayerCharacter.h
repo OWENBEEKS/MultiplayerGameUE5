@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "InputMappingContext.h"
+
 #include "MultiplayerCharacter.generated.h"
 
 UCLASS()
@@ -12,18 +14,30 @@ class MPSHOOTER_API AMultiplayerCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	AMultiplayerCharacter();
+	virtual void Tick(float DeltaTime) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputMappingContext* InputMappingContext;
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* MoveAction;
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* LookAction;
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* JumpAction;
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	void Move(const FInputActionInstance& Instance);
+	void Look(const FInputActionInstance& Instance);
+	void Jump(const FInputActionInstance& Instance);
+private:
+	UPROPERTY(VisibleAnywhere, Category = Camera)
+	class USpringArmComponent* CameraBoom; 
+	UPROPERTY(VisibleAnywhere, Category = Camera)
+	class UCameraComponent* FollowCamera;
+public:
 
 };
