@@ -1,12 +1,12 @@
-"C:/Practice/MP_Test/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Private/Menu.cpp"
-@"C:/Practice/MP_Test/Plugins/MultiplayerSessions/Intermediate/Build/Win64/x64/UnrealGame/Development/MultiplayerSessions/MultiplayerSessions.Shared.rsp"
-/FI"C:/Practice/MP_Test/Intermediate/Build/Win64/x64/MP_Test/Development/Engine/SharedPCH.Engine.Project.ValApi.ValExpApi.Cpp20.h"
-/FI"C:/Practice/MP_Test/Plugins/MultiplayerSessions/Intermediate/Build/Win64/x64/UnrealGame/Development/MultiplayerSessions/Definitions.MultiplayerSessions.h"
-/Yu"C:/Practice/MP_Test/Intermediate/Build/Win64/x64/MP_Test/Development/Engine/SharedPCH.Engine.Project.ValApi.ValExpApi.Cpp20.h"
-/Fp"C:/Practice/MP_Test/Intermediate/Build/Win64/x64/MP_Test/Development/Engine/SharedPCH.Engine.Project.ValApi.ValExpApi.Cpp20.h.pch"
-/Fo"C:/Practice/MP_Test/Plugins/MultiplayerSessions/Intermediate/Build/Win64/x64/UnrealGame/Development/MultiplayerSessions/Menu.cpp.obj"
-/experimental:log "C:/Practice/MP_Test/Plugins/MultiplayerSessions/Intermediate/Build/Win64/x64/UnrealGame/Development/MultiplayerSessions/Menu.cpp.sarif"
-/sourceDependencies "C:/Practice/MP_Test/Plugins/MultiplayerSessions/Intermediate/Build/Win64/x64/UnrealGame/Development/MultiplayerSessions/Menu.cpp.dep.json"
+"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Private/Menu.cpp"
+@"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Plugins/MultiplayerSessions/Intermediate/Build/Win64/x64/UnrealGame/Development/MultiplayerSessions/MultiplayerSessions.Shared.rsp"
+/FI"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Intermediate/Build/Win64/x64/MPShooter/Development/Engine/SharedPCH.Engine.Project.ValApi.ValExpApi.Cpp20.h"
+/FI"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Plugins/MultiplayerSessions/Intermediate/Build/Win64/x64/UnrealGame/Development/MultiplayerSessions/Definitions.MultiplayerSessions.h"
+/Yu"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Intermediate/Build/Win64/x64/MPShooter/Development/Engine/SharedPCH.Engine.Project.ValApi.ValExpApi.Cpp20.h"
+/Fp"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Intermediate/Build/Win64/x64/MPShooter/Development/Engine/SharedPCH.Engine.Project.ValApi.ValExpApi.Cpp20.h.pch"
+/Fo"D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Plugins/MultiplayerSessions/Intermediate/Build/Win64/x64/UnrealGame/Development/MultiplayerSessions/Menu.cpp.obj"
+/experimental:log "D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Plugins/MultiplayerSessions/Intermediate/Build/Win64/x64/UnrealGame/Development/MultiplayerSessions/Menu.cpp.sarif"
+/sourceDependencies "D:/Unreal Engine Projects/MultiplayerGame/MultiplayerGameUE5/MPShooter/Plugins/MultiplayerSessions/Intermediate/Build/Win64/x64/UnrealGame/Development/MultiplayerSessions/Menu.cpp.dep.json"
 /d2ssa-cfg-question-
 /Zc:inline
 /nologo

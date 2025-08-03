@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal engine projects\\multiplayergame\\multiplayergameue5\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\multiplayersessions\\permoduleinline.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal engine projects\\multiplayergame\\multiplayergameue5\\mpshooter\\intermediate\\build\\win64\\x64\\mpshootereditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\unreal engine projects\\multiplayergame\\multiplayergameue5\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\multiplayersessions\\definitions.multiplayersessions.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\source\\runtime\\core\\public\\hal\\permoduleinline.inl"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

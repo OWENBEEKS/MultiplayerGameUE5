@@ -1,0 +1,24 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\unreal engine projects\\multiplayergame\\multiplayergameue5\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealgame\\inc\\multiplayersessions\\uht\\multiplayersessionssubsystem.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\unreal engine projects\\multiplayergame\\multiplayergameue5\\mpshooter\\intermediate\\build\\win64\\x64\\mpshooter\\development\\engine\\sharedpch.engine.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\unreal engine projects\\multiplayergame\\multiplayergameue5\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\x64\\unrealgame\\development\\multiplayersessions\\definitions.multiplayersessions.h",
+            "d:\\unreal engine projects\\multiplayergame\\multiplayergameue5\\mpshooter\\plugins\\multiplayersessions\\source\\multiplayersessions\\public\\multiplayersessionssubsystem.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\interfaces\\onlinesessioninterface.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesubsystemtypes.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesubsystemnames.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinedelegatemacros.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\interfaces\\onlinesessiondelegates.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinekeyvaluepair.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesessionsettings.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesubsystem.h",
+            "c:\\program files\\epic games\\ue_5.6\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesubsystemmodule.h",
+            "d:\\unreal engine projects\\multiplayergame\\multiplayergameue5\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealgame\\inc\\multiplayersessions\\uht\\multiplayersessionssubsystem.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

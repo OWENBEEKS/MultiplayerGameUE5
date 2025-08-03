@@ -17,21 +17,21 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 // ********** Begin Delegate FMultiplayerOnCreateSessionComplete ***********************************
-#define FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_14_DELEGATE \
+#define FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_15_DELEGATE \
 MULTIPLAYERSESSIONS_API void FMultiplayerOnCreateSessionComplete_DelegateWrapper(const FMulticastScriptDelegate& MultiplayerOnCreateSessionComplete, bool bWasSuccessful);
 
 
 // ********** End Delegate FMultiplayerOnCreateSessionComplete *************************************
 
 // ********** Begin Delegate FMultiplayerOnDestroySessionComplete **********************************
-#define FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_17_DELEGATE \
+#define FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_18_DELEGATE \
 MULTIPLAYERSESSIONS_API void FMultiplayerOnDestroySessionComplete_DelegateWrapper(const FMulticastScriptDelegate& MultiplayerOnDestroySessionComplete, bool bWasSuccessful);
 
 
 // ********** End Delegate FMultiplayerOnDestroySessionComplete ************************************
 
 // ********** Begin Delegate FMultiplayerOnStartSessionComplete ************************************
-#define FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_18_DELEGATE \
+#define FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_19_DELEGATE \
 MULTIPLAYERSESSIONS_API void FMultiplayerOnStartSessionComplete_DelegateWrapper(const FMulticastScriptDelegate& MultiplayerOnStartSessionComplete, bool bWasSuccessful);
 
 
@@ -40,7 +40,7 @@ MULTIPLAYERSESSIONS_API void FMultiplayerOnStartSessionComplete_DelegateWrapper(
 // ********** Begin Class UMultiplayerSessionsSubsystem ********************************************
 MULTIPLAYERSESSIONS_API UClass* Z_Construct_UClass_UMultiplayerSessionsSubsystem_NoRegister();
 
-#define FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_26_INCLASS_NO_PURE_DECLS \
+#define FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_27_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUMultiplayerSessionsSubsystem(); \
 	friend struct Z_Construct_UClass_UMultiplayerSessionsSubsystem_Statics; \
@@ -51,7 +51,7 @@ public: \
 	DECLARE_SERIALIZER(UMultiplayerSessionsSubsystem)
 
 
-#define FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_26_ENHANCED_CONSTRUCTORS \
+#define FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_27_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	UMultiplayerSessionsSubsystem(UMultiplayerSessionsSubsystem&&) = delete; \
 	UMultiplayerSessionsSubsystem(const UMultiplayerSessionsSubsystem&) = delete; \
@@ -61,12 +61,12 @@ public: \
 	NO_API virtual ~UMultiplayerSessionsSubsystem();
 
 
-#define FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_23_PROLOG
-#define FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_26_GENERATED_BODY \
+#define FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_24_PROLOG
+#define FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_27_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_26_INCLASS_NO_PURE_DECLS \
-	FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_26_ENHANCED_CONSTRUCTORS \
+	FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_27_INCLASS_NO_PURE_DECLS \
+	FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h_27_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -76,6 +76,6 @@ class UMultiplayerSessionsSubsystem;
 // ********** End Class UMultiplayerSessionsSubsystem **********************************************
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h
+#define CURRENT_FILE_ID FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_MultiplayerSessionsSubsystem_h
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

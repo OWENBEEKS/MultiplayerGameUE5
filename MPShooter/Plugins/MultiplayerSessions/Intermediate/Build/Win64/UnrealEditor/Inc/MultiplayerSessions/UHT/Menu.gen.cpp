@@ -402,14 +402,14 @@ UMenu::~UMenu() {}
 // ********** End Class UMenu **********************************************************************
 
 // ********** Begin Registration *******************************************************************
-struct Z_CompiledInDeferFile_FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_Menu_h__Script_MultiplayerSessions_Statics
+struct Z_CompiledInDeferFile_FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_Menu_h__Script_MultiplayerSessions_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
 		{ Z_Construct_UClass_UMenu, UMenu::StaticClass, TEXT("UMenu"), &Z_Registration_Info_UClass_UMenu, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMenu), 3364956616U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_Menu_h__Script_MultiplayerSessions_2189828556(TEXT("/Script/MultiplayerSessions"),
-	Z_CompiledInDeferFile_FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_Menu_h__Script_MultiplayerSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Practice_MP_Test_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_Menu_h__Script_MultiplayerSessions_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_Menu_h__Script_MultiplayerSessions_2189828556(TEXT("/Script/MultiplayerSessions"),
+	Z_CompiledInDeferFile_FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_Menu_h__Script_MultiplayerSessions_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Plugins_MultiplayerSessions_Source_MultiplayerSessions_Public_Menu_h__Script_MultiplayerSessions_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // ********** End Registration *********************************************************************

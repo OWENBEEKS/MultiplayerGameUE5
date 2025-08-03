@@ -6,6 +6,7 @@
 #include "MultiplayerSessionsSubsystem.h"
 #include "OnlineSessionSettings.h"
 #include "OnlineSubsystem.h"
+#include <Kismet/GameplayStatics.h>
 
 void UMenu::MenuSetup(int32 NumberOfPublicConnections, FString TypeOfMatch, FString LobbyPath)
 {
@@ -71,15 +72,36 @@ void UMenu::NativeDestruct()
 	Super::NativeDestruct();
 }
 
+/*void UMenuWidget::OnCreateSession(bool bWasSuccessful)
+{
+    if (bWasSuccessful)
+    {
+        MenuTearDown();
+
+        UGameplayStatics::OpenLevel(
+            this,
+            FName(*PathToLobby),
+            true,
+            "listen"
+        );
+    }
+}*/
 void UMenu::OnCreateSession(bool bWasSuccessful)
 {
 	if (bWasSuccessful)
 	{
-		UWorld* World = GetWorld();
+		/*UWorld* World = GetWorld();
 		if (World)
 		{
 			World->ServerTravel(PathToLobby);
-		}
+		}*/
+
+		UGameplayStatics::OpenLevel(
+			this,
+			FName(*PathToLobby),
+			true,
+			"listen"
+		);
 	}
 	else
 	{
