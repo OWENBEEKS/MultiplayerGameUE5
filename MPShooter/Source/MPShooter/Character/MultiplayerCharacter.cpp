@@ -8,6 +8,8 @@
 #include "EnhancedInputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Net/UnrealNetwork.h"
+#include "MPShooter/Weapon/Weapon.h"
 
 AMultiplayerCharacter::AMultiplayerCharacter()
 {
@@ -28,6 +30,13 @@ AMultiplayerCharacter::AMultiplayerCharacter()
 
 	OverheadWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("OverheadWidget"));
 	OverheadWidget->SetupAttachment(RootComponent);
+}
+
+
+void AMultiplayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME_CONDITION(AMultiplayerCharacter, OverlappingWeapon, COND_OwnerOnly);
 }
 
 void AMultiplayerCharacter::BeginPlay()
@@ -59,6 +68,11 @@ void AMultiplayerCharacter::BeginPlay()
 	}
 }
 
+void AMultiplayerCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
 void AMultiplayerCharacter::Move(const FInputActionInstance& Instance)
 {
 	FVector2D MovementDirection = Instance.GetValue().Get<FVector2D>();
@@ -82,12 +96,6 @@ void AMultiplayerCharacter::Jump(const FInputActionInstance& Instance)
 	UE_LOG(LogTemp, Warning, TEXT("Jump action triggered."));
 }
 
-void AMultiplayerCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 void AMultiplayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -108,3 +116,30 @@ void AMultiplayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 }
 
+void AMultiplayerCharacter::SetOverlappingWeapon(AWeapon* Weapon)
+{
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->ShowPickupWidget(false);
+	}
+	OverlappingWeapon = Weapon;
+	if (IsLocallyControlled())
+	{
+		if (OverlappingWeapon)
+		{
+			OverlappingWeapon->ShowPickupWidget(true);
+		}
+	}
+}
+
+void AMultiplayerCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon)
+{
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->ShowPickupWidget(true);
+	}
+	if (LastWeapon)
+	{
+		LastWeapon->ShowPickupWidget(false);
+	}
+}
