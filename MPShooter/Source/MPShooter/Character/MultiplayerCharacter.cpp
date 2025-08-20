@@ -10,6 +10,7 @@
 #include "Components/WidgetComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "MPShooter/Weapon/Weapon.h"
+#include "MPShooter/ShooterComponents/CombatComponent.h"
 
 AMultiplayerCharacter::AMultiplayerCharacter()
 {
@@ -30,6 +31,9 @@ AMultiplayerCharacter::AMultiplayerCharacter()
 
 	OverheadWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("OverheadWidget"));
 	OverheadWidget->SetupAttachment(RootComponent);
+
+	Combat = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
+	Combat->SetIsReplicated(true);
 }
 
 
@@ -73,6 +77,15 @@ void AMultiplayerCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void AMultiplayerCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	if (Combat)
+	{
+		Combat->Character = this;
+	}
+}
+
 void AMultiplayerCharacter::Move(const FInputActionInstance& Instance)
 {
 	FVector2D MovementDirection = Instance.GetValue().Get<FVector2D>();
@@ -96,6 +109,14 @@ void AMultiplayerCharacter::Jump(const FInputActionInstance& Instance)
 	UE_LOG(LogTemp, Warning, TEXT("Jump action triggered."));
 }
 
+void AMultiplayerCharacter::EquipButtonPressed(const FInputActionInstance& Instance)
+{
+	if (Combat && HasAuthority())
+	{
+		Combat->EquipWeapon(OverlappingWeapon);
+	}
+}
+
 void AMultiplayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -112,6 +133,7 @@ void AMultiplayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		}
 		Input->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMultiplayerCharacter::Look);
 		Input->BindAction(JumpAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::Jump);
+		Input->BindAction(EquipButtonAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::EquipButtonPressed);
 	}
 
 }
