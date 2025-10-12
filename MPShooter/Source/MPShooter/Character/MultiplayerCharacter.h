@@ -33,6 +33,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* EquipButtonAction;
 
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* CrouchButtonAction;
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -40,6 +43,7 @@ protected:
 	void Look(const FInputActionInstance& Instance);
 	void Jump(const FInputActionInstance& Instance);
 	void EquipButtonPressed(const FInputActionInstance& Instance);
+	void CrouchButtonPressed();
 private:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 	class USpringArmComponent* CameraBoom; 
@@ -63,4 +67,5 @@ private:
 
 public:
 	void SetOverlappingWeapon(AWeapon* Weapon);
+	bool IsWeaponEquipped();
 };

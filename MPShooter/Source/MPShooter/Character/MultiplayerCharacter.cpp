@@ -34,6 +34,8 @@ AMultiplayerCharacter::AMultiplayerCharacter()
 
 	Combat = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
 	Combat->SetIsReplicated(true);
+
+	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 }
 
 
@@ -111,9 +113,28 @@ void AMultiplayerCharacter::Jump(const FInputActionInstance& Instance)
 
 void AMultiplayerCharacter::EquipButtonPressed(const FInputActionInstance& Instance)
 {
-	if (Combat && HasAuthority())
+	if (Combat)
 	{
-		Combat->EquipWeapon(OverlappingWeapon);
+		if (HasAuthority())
+		{
+			Combat->EquipWeapon(OverlappingWeapon);
+		}
+		else
+		{
+			ServerEquipButtonPressed();
+		}
+	}
+}
+
+void AMultiplayerCharacter::CrouchButtonPressed()
+{
+	if (bIsCrouched)
+	{
+		UnCrouch();
+	}
+	else
+	{
+		Crouch();
 	}
 }
 
@@ -134,8 +155,17 @@ void AMultiplayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		Input->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMultiplayerCharacter::Look);
 		Input->BindAction(JumpAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::Jump);
 		Input->BindAction(EquipButtonAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::EquipButtonPressed);
+		Input->BindAction(CrouchButtonAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::CrouchButtonPressed);
 	}
 
+}
+
+void AMultiplayerCharacter::ServerEquipButtonPressed_Implementation()
+{
+	if (Combat)
+	{
+		Combat->EquipWeapon(OverlappingWeapon);
+	}
 }
 
 void AMultiplayerCharacter::SetOverlappingWeapon(AWeapon* Weapon)
@@ -152,6 +182,11 @@ void AMultiplayerCharacter::SetOverlappingWeapon(AWeapon* Weapon)
 			OverlappingWeapon->ShowPickupWidget(true);
 		}
 	}
+}
+
+bool AMultiplayerCharacter::IsWeaponEquipped()
+{
+	return (Combat && Combat->EquippedWeapon);
 }
 
 void AMultiplayerCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon)
