@@ -126,7 +126,7 @@ void AMultiplayerCharacter::EquipButtonPressed(const FInputActionInstance& Insta
 	}
 }
 
-void AMultiplayerCharacter::CrouchButtonPressed()
+void AMultiplayerCharacter::CrouchButtonPressed(const FInputActionInstance& Instance)
 {
 	if (bIsCrouched)
 	{
@@ -135,6 +135,22 @@ void AMultiplayerCharacter::CrouchButtonPressed()
 	else
 	{
 		Crouch();
+	}
+}
+
+void AMultiplayerCharacter::AimButtonPressedFunc(const FInputActionInstance& Instance)
+{
+	if (Combat)
+	{
+		Combat->SetAiming(true);
+	}
+}
+
+void AMultiplayerCharacter::AimButtonReleasedFunc(const FInputActionInstance& Instance)
+{
+	if (Combat)
+	{
+		Combat->SetAiming(false);
 	}
 }
 
@@ -156,6 +172,8 @@ void AMultiplayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		Input->BindAction(JumpAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::Jump);
 		Input->BindAction(EquipButtonAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::EquipButtonPressed);
 		Input->BindAction(CrouchButtonAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::CrouchButtonPressed);
+		Input->BindAction(AimButtonPressed, ETriggerEvent::Started, this, &AMultiplayerCharacter::AimButtonPressedFunc);
+		Input->BindAction(AimButtonReleased, ETriggerEvent::Completed, this, &AMultiplayerCharacter::AimButtonReleasedFunc);
 	}
 
 }
@@ -187,6 +205,11 @@ void AMultiplayerCharacter::SetOverlappingWeapon(AWeapon* Weapon)
 bool AMultiplayerCharacter::IsWeaponEquipped()
 {
 	return (Combat && Combat->EquippedWeapon);
+}
+
+bool AMultiplayerCharacter::IsAiming()
+{
+	return (Combat && Combat->bAiming);
 }
 
 void AMultiplayerCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon)
