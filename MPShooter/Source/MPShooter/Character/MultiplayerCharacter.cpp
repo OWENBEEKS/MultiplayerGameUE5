@@ -105,7 +105,7 @@ void AMultiplayerCharacter::Look(const FInputActionInstance& Instance)
 	AddControllerPitchInput(LookDirection.Y);
 }
 
-void AMultiplayerCharacter::Jump(const FInputActionInstance& Instance)
+void AMultiplayerCharacter::Jump()
 {
 	Super::Jump();
 	UE_LOG(LogTemp, Warning, TEXT("Jump action triggered."));

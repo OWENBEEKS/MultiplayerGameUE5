@@ -47,7 +47,7 @@ protected:
 
 	void Move(const FInputActionInstance& Instance);
 	void Look(const FInputActionInstance& Instance);
-	void Jump(const FInputActionInstance& Instance);
+	virtual void Jump() override;
 	void EquipButtonPressed(const FInputActionInstance& Instance);
 	void CrouchButtonPressed(const FInputActionInstance& Instance);
 	void AimButtonPressedFunc(const FInputActionInstance& Instance);
