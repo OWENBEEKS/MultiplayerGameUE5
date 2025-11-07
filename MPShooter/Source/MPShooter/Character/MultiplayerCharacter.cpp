@@ -173,7 +173,7 @@ void AMultiplayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		Input->BindAction(EquipButtonAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::EquipButtonPressed);
 		Input->BindAction(CrouchButtonAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::CrouchButtonPressed);
 		Input->BindAction(AimButtonPressed, ETriggerEvent::Started, this, &AMultiplayerCharacter::AimButtonPressedFunc);
-		Input->BindAction(AimButtonReleased, ETriggerEvent::Started, this, &AMultiplayerCharacter::AimButtonReleasedFunc);
+		Input->BindAction(AimButtonReleased, ETriggerEvent::Completed, this, &AMultiplayerCharacter::AimButtonReleasedFunc);
 	}
 
 }
