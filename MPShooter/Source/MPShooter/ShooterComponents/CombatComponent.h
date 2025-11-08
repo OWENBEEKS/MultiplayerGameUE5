@@ -35,4 +35,10 @@ private:
 	class AWeapon* EquippedWeapon;	
 	UPROPERTY(Replicated)
 	bool bAiming;
+
+	UPROPERTY(EditAnywhere)
+	float BaseWalkSpeed;
+
+	UPROPERTY(EditAnywhere)
+	float AimWalkSpeed;
 };
