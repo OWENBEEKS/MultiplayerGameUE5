@@ -249,6 +249,12 @@ bool AMultiplayerCharacter::IsAiming()
 	return (Combat && Combat->bAiming);
 }
 
+AWeapon* AMultiplayerCharacter::GetEquippedWeapon()
+{
+	if (Combat == nullptr) return nullptr;
+	return Combat->EquippedWeapon;
+}
+
 void AMultiplayerCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon)
 {
 	if (OverlappingWeapon)
