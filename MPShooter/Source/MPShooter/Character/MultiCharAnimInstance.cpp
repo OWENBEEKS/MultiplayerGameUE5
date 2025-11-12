@@ -34,6 +34,7 @@ void UMultiCharAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	EquippedWeapon = PlayerCharacter->GetEquippedWeapon();
 	bIsCrouched = PlayerCharacter->bIsCrouched;
 	bAiming = PlayerCharacter->IsAiming();
+	TurningInPlace = PlayerCharacter->GetTurningInPlace();
 
 	// Offset Yaw for Strafing
 	FRotator AimRotation = PlayerCharacter->GetBaseAimRotation();
