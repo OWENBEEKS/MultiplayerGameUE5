@@ -13,6 +13,7 @@
 #include "MPShooter/ShooterComponents/CombatComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "MultiCharAnimInstance.h"
 
 AMultiplayerCharacter::AMultiplayerCharacter()
 {
@@ -40,10 +41,11 @@ AMultiplayerCharacter::AMultiplayerCharacter()
 	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 850.f, 0.f);  // Faster turn rate
 
 	TurningInPlace = ETurningInPlace::ETIP_NotTurning;
-	NetUpdateFrequency = 66.f;
-	MinNetUpdateFrequency = 33.f;
+	SetNetUpdateFrequency(66.f);
+	SetMinNetUpdateFrequency(33.f);
 }
 
 
@@ -97,6 +99,20 @@ void AMultiplayerCharacter::PostInitializeComponents()
 	}
 }
 
+void AMultiplayerCharacter::PlayFireMontage(bool bAiming)
+{
+	if (Combat == nullptr || Combat->EquippedWeapon == nullptr) return;
+
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && FireWeaponMontage)
+	{
+		AnimInstance->Montage_Play(FireWeaponMontage);
+		FName SectionName;
+		SectionName = bAiming ? FName("RifleAim") : FName("RifleHip");
+		AnimInstance->Montage_JumpToSection(SectionName);
+	}
+}
+
 void AMultiplayerCharacter::Move(const FInputActionInstance& Instance)
 {
 	FVector2D MovementDirection = Instance.GetValue().Get<FVector2D>();
@@ -114,10 +130,16 @@ void AMultiplayerCharacter::Look(const FInputActionInstance& Instance)
 	AddControllerPitchInput(LookDirection.Y);
 }
 
-void AMultiplayerCharacter::Jump()
+void AMultiplayerCharacter::Jump() 
 {
-	Super::Jump();
-	UE_LOG(LogTemp, Warning, TEXT("Jump action triggered."));
+	if(bIsCrouched)
+	{
+		UnCrouch();
+	}
+	else
+	{
+		Super::Jump();
+	}
 }
 
 void AMultiplayerCharacter::EquipButtonPressed(const FInputActionInstance& Instance)
@@ -176,14 +198,14 @@ void AMultiplayerCharacter::AimOffset(float DeltaTime)
 		FRotator CurrentAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
 		FRotator DeltaAimRotation = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAimRotation, StartingAimRotation);
 		AO_Yaw = DeltaAimRotation.Yaw;
-		if(TurningInPlace == ETurningInPlace::ETIP_NotTurning)
+		if (TurningInPlace == ETurningInPlace::ETIP_NotTurning)
 		{
 			InterpAO_Yaw = AO_Yaw;
 		}
 		bUseControllerRotationYaw = true;
 		TurnInPlace(DeltaTime);
 	}
-	if(Speed> 0.f || bIsInAir) // Running or jumping
+	if (Speed > 0.f || bIsInAir) // Running or jumping
 	{
 		StartingAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
 		AO_Yaw = 0.f;
@@ -198,6 +220,22 @@ void AMultiplayerCharacter::AimOffset(float DeltaTime)
 		FVector2D InRange(270.f, 360.f);
 		FVector2D OutRange(-90.f, 0.f);
 		AO_Pitch = FMath::GetMappedRangeValueClamped(InRange, OutRange, AO_Pitch);
+	}
+}
+
+void AMultiplayerCharacter::FireButtonPressedFunc()
+{
+	if (Combat)
+	{
+		Combat->FireButtonPressed(true);
+	}
+}
+
+void AMultiplayerCharacter::FireButtonReleasedFunc()
+{
+	if (Combat)
+	{
+		Combat->FireButtonPressed(false);
 	}
 }
 
@@ -244,6 +282,8 @@ void AMultiplayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 		Input->BindAction(CrouchButtonAction, ETriggerEvent::Started, this, &AMultiplayerCharacter::CrouchButtonPressed);
 		Input->BindAction(AimButtonPressed, ETriggerEvent::Started, this, &AMultiplayerCharacter::AimButtonPressedFunc);
 		Input->BindAction(AimButtonReleased, ETriggerEvent::Completed, this, &AMultiplayerCharacter::AimButtonReleasedFunc);
+		Input->BindAction(FireButtonPressed, ETriggerEvent::Started, this, &AMultiplayerCharacter::FireButtonPressedFunc);
+		Input->BindAction(FireButtonReleased, ETriggerEvent::Completed, this, &AMultiplayerCharacter::FireButtonReleasedFunc);
 	}
 
 }
