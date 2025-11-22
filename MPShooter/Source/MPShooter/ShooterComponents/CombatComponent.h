@@ -39,9 +39,13 @@ protected:
 	void MulticastFire(const FVector_NetQuantize& TraceHitTarget);
 
 	void TraceUnderCrosshairs(FHitResult& TraceHitResult);
+	
+	void SetHUDCrosshairs(float DeltaTime);
 
 private:
 	class AMultiplayerCharacter* Character;
+	class AShooterPlayerController* Controller;
+	class AShooterHUD* HUD;
 
 	UPROPERTY(ReplicatedUsing = OnRep_EquippedWeapon)
 	class AWeapon* EquippedWeapon;	
