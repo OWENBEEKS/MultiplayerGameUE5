@@ -329,6 +329,12 @@ AWeapon* AMultiplayerCharacter::GetEquippedWeapon()
 	return Combat->EquippedWeapon;
 }
 
+FVector AMultiplayerCharacter::GetHitTarget() const
+{
+	if (Combat == nullptr) return FVector();
+	return Combat->HitTarget;
+}
+
 void AMultiplayerCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon)
 {
 	if (OverlappingWeapon)
