@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "MPShooter/HUD/ShooterHUD.h"
 #include "CombatComponent.generated.h" // This include must appear last among all other includes
 
 #define TRACE_LENGTH 80000.f
@@ -69,6 +70,9 @@ private:
 	float CrosshairShootingFactor;
 
 	FVector HitTarget;
+
+	FHUDPackage HUDPackage;
+
 	/*
 	// Aiming and fov
 	*/

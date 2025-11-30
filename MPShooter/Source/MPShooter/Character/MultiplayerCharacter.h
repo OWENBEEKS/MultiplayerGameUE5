@@ -6,10 +6,12 @@
 #include "GameFramework/Character.h"
 #include "InputMappingContext.h"
 #include "MPShooter/ShooterTypes/TurningInPlace.h"
+#include "MPShooter/Interfaces/InteractWithCrosshairsInterface.h"
+
 #include "MultiplayerCharacter.generated.h"
 
 UCLASS()
-class MPSHOOTER_API AMultiplayerCharacter : public ACharacter
+class MPSHOOTER_API AMultiplayerCharacter : public ACharacter, public IInteractWithCrosshairsInterface
 {
 	GENERATED_BODY()
 
@@ -21,8 +23,11 @@ public:
 	virtual void PostInitializeComponents() override;
 
 	void PlayFireMontage(bool bAiming);
+	void PlayHitReactMontage();
 
-
+	UFUNCTION(NetMulticast, Unreliable)
+	void MulticastHit();
+	
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputMappingContext* InputMappingContext;
 	UPROPERTY(EditAnywhere, Category = Input)
@@ -95,6 +100,13 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	class UAnimMontage* FireWeaponMontage;
+
+	UPROPERTY(EditAnywhere, Category = Combat)
+	class UAnimMontage* HitReactMontage;
+
+	void HideCameraIfCharacterClose();
+	UPROPERTY(EditAnywhere, Category = Camera)
+	float CameraThresholdDistance = 200.f;
 
 public:
 	void SetOverlappingWeapon(AWeapon* Weapon);

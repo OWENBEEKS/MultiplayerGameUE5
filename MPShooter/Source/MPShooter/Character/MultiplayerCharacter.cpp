@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ // Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "MultiplayerCharacter.h"
@@ -14,6 +14,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "MultiCharAnimInstance.h"
+#include "MPShooter/MPShooter.h"
 
 AMultiplayerCharacter::AMultiplayerCharacter()
 {
@@ -40,7 +41,9 @@ AMultiplayerCharacter::AMultiplayerCharacter()
 
 	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
+	GetMesh()->SetCollisionObjectType(ECC_SkeletalMesh);
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
+	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block);
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 850.f, 0.f);  // Faster turn rate
 
 	TurningInPlace = ETurningInPlace::ETIP_NotTurning;
@@ -88,6 +91,7 @@ void AMultiplayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	AimOffset(DeltaTime);
+	HideCameraIfCharacterClose();
 }
 
 void AMultiplayerCharacter::PostInitializeComponents()
@@ -111,6 +115,24 @@ void AMultiplayerCharacter::PlayFireMontage(bool bAiming)
 		SectionName = bAiming ? FName("RifleAim") : FName("RifleHip");
 		AnimInstance->Montage_JumpToSection(SectionName);
 	}
+}
+
+void AMultiplayerCharacter::PlayHitReactMontage()
+{
+	if (Combat == nullptr || Combat->EquippedWeapon == nullptr) return;
+
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && HitReactMontage)
+	{
+		AnimInstance->Montage_Play(HitReactMontage);
+		FName SectionName("FromFront");
+		AnimInstance->Montage_JumpToSection(SectionName);
+	}
+}
+
+void AMultiplayerCharacter::MulticastHit_Implementation()
+{
+	PlayHitReactMontage();
 }
 
 void AMultiplayerCharacter::Move(const FInputActionInstance& Instance)
@@ -296,6 +318,29 @@ void AMultiplayerCharacter::ServerEquipButtonPressed_Implementation()
 	}
 }
 
+
+void AMultiplayerCharacter::HideCameraIfCharacterClose()
+{
+	if (!IsLocallyControlled()) return;
+	if ((FollowCamera->GetComponentLocation() - GetActorLocation()).Size() < CameraThresholdDistance) 
+	{
+		GetMesh()->SetVisibility(false);
+		if(Combat && Combat->EquippedWeapon && Combat->EquippedWeapon->GetWeaponMesh())
+		{
+			Combat->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = true;
+		}
+		
+	}
+
+	else
+	{
+		GetMesh()->SetVisibility(true);
+		if (Combat && Combat->EquippedWeapon && Combat->EquippedWeapon->GetWeaponMesh())
+		{
+			Combat->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = false;
+		}
+	}
+}
 
 void AMultiplayerCharacter::SetOverlappingWeapon(AWeapon* Weapon)
 {
