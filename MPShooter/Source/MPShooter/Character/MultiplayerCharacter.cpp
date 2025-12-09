@@ -15,6 +15,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "MultiCharAnimInstance.h"
 #include "MPShooter/MPShooter.h"
+#include "MPShooter/PlayerController/ShooterPlayerController.h"	
 
 AMultiplayerCharacter::AMultiplayerCharacter()
 {
@@ -56,6 +57,7 @@ void AMultiplayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME_CONDITION(AMultiplayerCharacter, OverlappingWeapon, COND_OwnerOnly);
+	DOREPLIFETIME(AMultiplayerCharacter, Health);
 }
 
 void AMultiplayerCharacter::OnRep_ReplicatedMovement()
@@ -68,6 +70,12 @@ void AMultiplayerCharacter::OnRep_ReplicatedMovement()
 void AMultiplayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	ShooterPlayerController = Cast<AShooterPlayerController>(Controller);
+	if (ShooterPlayerController)
+	{
+		ShooterPlayerController->SetHUDHealth(Health, MaxHealth);
+	}
 	if (Controller)
 	{
 		UE_LOG(LogTemp, Display, TEXT("%s is possessed by %s"), *GetName(), *Controller->GetName());
@@ -407,6 +415,11 @@ void AMultiplayerCharacter::HideCameraIfCharacterClose()
 			Combat->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = false;
 		}
 	}
+}
+
+void AMultiplayerCharacter::OnRep_Health()
+{
+
 }
 
 void AMultiplayerCharacter::SetOverlappingWeapon(AWeapon* Weapon)
