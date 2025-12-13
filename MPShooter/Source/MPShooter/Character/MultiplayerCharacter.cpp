@@ -71,10 +71,10 @@ void AMultiplayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ShooterPlayerController = Cast<AShooterPlayerController>(Controller);
-	if (ShooterPlayerController)
-	{
-		ShooterPlayerController->SetHUDHealth(Health, MaxHealth);
+	
+	if(HasAuthority())
+	{ 
+		OnTakeAnyDamage.AddDynamic(this, &AMultiplayerCharacter::ReceiveDamage);
 	}
 	if (Controller)
 	{
@@ -155,11 +155,6 @@ void AMultiplayerCharacter::PlayHitReactMontage()
 		FName SectionName("FromFront");
 		AnimInstance->Montage_JumpToSection(SectionName);
 	}
-}
-
-void AMultiplayerCharacter::MulticastHit_Implementation()
-{
-	PlayHitReactMontage();
 }
 
 void AMultiplayerCharacter::Move(const FInputActionInstance& Instance)
@@ -336,6 +331,13 @@ void AMultiplayerCharacter::FireButtonReleasedFunc()
 	}
 }
 
+void AMultiplayerCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatorController, AActor* DamageCauser)
+{
+	Health = FMath::Clamp(Health - Damage, 0.f, MaxHealth);
+	UpdateHUDHealth();
+	PlayHitReactMontage();
+
+}
 
 void AMultiplayerCharacter::TurnInPlace(float DeltaTime)
 {
@@ -419,7 +421,17 @@ void AMultiplayerCharacter::HideCameraIfCharacterClose()
 
 void AMultiplayerCharacter::OnRep_Health()
 {
+	UpdateHUDHealth();
+	PlayHitReactMontage();
+}
 
+void AMultiplayerCharacter::UpdateHUDHealth()
+{
+	ShooterPlayerController = ShooterPlayerController == nullptr ? Cast<AShooterPlayerController>(Controller) : ShooterPlayerController = ShooterPlayerController;
+	if (ShooterPlayerController)
+	{
+		ShooterPlayerController->SetHUDHealth(Health, MaxHealth);
+	}
 }
 
 void AMultiplayerCharacter::SetOverlappingWeapon(AWeapon* Weapon)

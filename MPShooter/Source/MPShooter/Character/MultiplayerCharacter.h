@@ -26,9 +26,6 @@ public:
 	void PlayHitReactMontage();
 
 	virtual void OnRep_ReplicatedMovement() override;
-
-	UFUNCTION(NetMulticast, Unreliable)
-	void MulticastHit();
 	
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputMappingContext* InputMappingContext;
@@ -72,6 +69,10 @@ protected:
 	void SimProxiesTurn();
 	void FireButtonPressedFunc();
 	void FireButtonReleasedFunc();
+
+	UFUNCTION()
+	void ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, class AController* InstigatorController, AActor* DamageCauser);
+	void UpdateHUDHealth();
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
