@@ -53,14 +53,7 @@ void AProjectile::BeginPlay()
 }
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
-{
-	AMultiplayerCharacter* MultiplayerCharacter = Cast<AMultiplayerCharacter>(OtherActor);
-	if (MultiplayerCharacter)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Projectile hit character: %s"), *MultiplayerCharacter->GetName());
-		MultiplayerCharacter->MulticastHit();
-	}
-
+{	
 	Destroy();
 }
 
